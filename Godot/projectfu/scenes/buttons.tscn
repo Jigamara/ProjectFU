@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://c8ytl7mmil51u"]
+
+[ext_resource type="Texture2D" uid="uid://dk81ehfwxpyct" path="res://assets/icons/up.svg" id="1_2ta48"]
+[ext_resource type="Texture2D" uid="uid://kwya0q6vl0ra" path="res://assets/icons/down.svg" id="2_xc7ul"]
+
+[node name="CanvasLayer" type="CanvasLayer"]
+
+[node name="up" type="TouchScreenButton" parent="."]
+position = Vector2(1878, 1268)
+scale = Vector2(0.246094, 0.246094)
+texture_normal = ExtResource("1_2ta48")
+action = "go_up"
+
+[node name="down" type="TouchScreenButton" parent="."]
+position = Vector2(2076, 1268)
+scale = Vector2(0.25, 0.25)
+texture_normal = ExtResource("2_xc7ul")
+action = "go_down"

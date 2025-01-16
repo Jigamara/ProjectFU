@@ -1,0 +1,132 @@
+[gd_scene load_steps=12 format=3 uid="uid://bemhs7gmrige"]
+
+[ext_resource type="Script" path="res://script/main.gd" id="1_6r1up"]
+[ext_resource type="Texture2D" uid="uid://bv3brji2okx2g" path="res://assets/cubo.png" id="1_wrrfe"]
+[ext_resource type="Texture2D" uid="uid://dby6qy52k8sd2" path="res://assets/fondo.webp" id="2_0acd0"]
+[ext_resource type="Script" path="res://script/cubito.gd" id="3_8rgtu"]
+[ext_resource type="Script" path="res://script/rotacion.gd" id="3_pgafb"]
+[ext_resource type="Texture2D" uid="uid://5n4fo52gn5f4" path="res://assets/rampa.png" id="5_3lfov"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hx6kd"]
+size = Vector2(133, 147)
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_scqqh"]
+friction = 0.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r0rkc"]
+size = Vector2(46.2968, 4.57627)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n7u0y"]
+size = Vector2(7535, 105)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_svg3b"]
+bg_color = Color(0.201527, 0.201527, 0.201526, 1)
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_6r1up")
+
+[node name="Fondo" type="Sprite2D" parent="."]
+position = Vector2(1133, 738.5)
+scale = Vector2(2.21289, 1.43652)
+texture = ExtResource("2_0acd0")
+
+[node name="Cubito" type="RigidBody2D" parent="."]
+position = Vector2(-1241, -602)
+script = ExtResource("3_8rgtu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Cubito"]
+position = Vector2(1456.09, 597.5)
+shape = SubResource("RectangleShape2D_hx6kd")
+debug_color = Color(0, 0.6, 0.701961, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="Cubito"]
+position = Vector2(1438.59, 581)
+scale = Vector2(0.157908, 0.166667)
+texture = ExtResource("1_wrrfe")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(1738, 1267)
+physics_material_override = SubResource("PhysicsMaterial_scqqh")
+script = ExtResource("3_pgafb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-688.095, 49.5)
+scale = Vector2(41.2381, 19.6667)
+shape = SubResource("RectangleShape2D_r0rkc")
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
+position = Vector2(-687.5, 50.5)
+texture = ExtResource("5_3lfov")
+
+[node name="FinMapa" type="Area2D" parent="."]
+position = Vector2(1732, 1070)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FinMapa"]
+position = Vector2(341.5, 387)
+shape = SubResource("RectangleShape2D_n7u0y")
+
+[node name="timer" type="Label" parent="."]
+offset_left = 1930.0
+offset_top = 35.0
+offset_right = 2226.0
+offset_bottom = 113.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 38
+theme_override_styles/normal = SubResource("StyleBoxFlat_svg3b")
+text = "Tiempo: 0.00"
+horizontal_alignment = 1
+vertical_alignment = 1
+justification_flags = 162
+
+[node name="Angle" type="Label" parent="."]
+offset_left = 1732.0
+offset_top = 716.0
+offset_right = 2147.0
+offset_bottom = 794.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 38
+theme_override_styles/normal = SubResource("StyleBoxFlat_svg3b")
+horizontal_alignment = 1
+vertical_alignment = 1
+justification_flags = 162
+
+[node name="VelocidadY" type="Label" parent="."]
+offset_left = 1732.0
+offset_top = 834.0
+offset_right = 2147.0
+offset_bottom = 912.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 38
+theme_override_styles/normal = SubResource("StyleBoxFlat_svg3b")
+text = "Velocidad en Y: 0.00"
+horizontal_alignment = 1
+vertical_alignment = 1
+justification_flags = 162
+
+[node name="VelocidadX" type="Label" parent="."]
+offset_left = 1732.0
+offset_top = 952.0
+offset_right = 2147.0
+offset_bottom = 1030.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 38
+theme_override_styles/normal = SubResource("StyleBoxFlat_svg3b")
+text = "Velocidad en X: 0.00"
+horizontal_alignment = 1
+vertical_alignment = 1
+justification_flags = 162
+
+[node name="Aceleracion" type="Label" parent="."]
+offset_left = 1732.0
+offset_top = 1070.0
+offset_right = 2147.0
+offset_bottom = 1148.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 38
+theme_override_styles/normal = SubResource("StyleBoxFlat_svg3b")
+text = "Aceleración: 0"
+horizontal_alignment = 1
+vertical_alignment = 1
+justification_flags = 162
+
+[connection signal="body_entered" from="FinMapa" to="Cubito" method="_on_fin_mapa_body_entered"]
