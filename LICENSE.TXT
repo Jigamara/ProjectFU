@@ -1,0 +1,8 @@
+Copyright (C) 2025 MARIO ALBERTO JIMÉNEZ GARCÍA Y MAURICIO JIMÉNEZ SALAZAR
+
+Este software se proporciona de forma gratuita para usos personales, educativos y no comerciales. 
+Cualquier uso comercial del software, o de obras derivadas del mismo, requiere autorización previa por escrito del autor.
+
+El software se distribuye "tal cual", sin garantías de ningún tipo.
+
+Proyecto FU © 2025 by Mario Alberto Jiménez García y Mauricio Jiménez Salazar is licensed under CC BY-NC-ND 4.0 
