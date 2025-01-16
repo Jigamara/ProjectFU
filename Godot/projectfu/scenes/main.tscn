@@ -1,14 +1,18 @@
-[gd_scene load_steps=12 format=3 uid="uid://bemhs7gmrige"]
+[gd_scene load_steps=14 format=3 uid="uid://bemhs7gmrige"]
 
 [ext_resource type="Script" path="res://script/main.gd" id="1_6r1up"]
 [ext_resource type="Texture2D" uid="uid://bv3brji2okx2g" path="res://assets/cubo.png" id="1_wrrfe"]
 [ext_resource type="Texture2D" uid="uid://dby6qy52k8sd2" path="res://assets/fondo.webp" id="2_0acd0"]
 [ext_resource type="Script" path="res://script/cubito.gd" id="3_8rgtu"]
 [ext_resource type="Script" path="res://script/rotacion.gd" id="3_pgafb"]
+[ext_resource type="Script" path="res://script/bar_hitbox.gd" id="5_0fn81"]
 [ext_resource type="Texture2D" uid="uid://5n4fo52gn5f4" path="res://assets/rampa.png" id="5_3lfov"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hx6kd"]
 size = Vector2(133, 147)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pmwle"]
+size = Vector2(1916, 70)
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_scqqh"]
 friction = 0.0
@@ -31,30 +35,38 @@ scale = Vector2(2.21289, 1.43652)
 texture = ExtResource("2_0acd0")
 
 [node name="Cubito" type="RigidBody2D" parent="."]
-position = Vector2(-1241, -602)
+position = Vector2(222, 17)
+angular_damp = -1.0
 script = ExtResource("3_8rgtu")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Cubito"]
-position = Vector2(1456.09, 597.5)
+position = Vector2(2.09192, 2.50018)
 shape = SubResource("RectangleShape2D_hx6kd")
 debug_color = Color(0, 0.6, 0.701961, 1)
 
 [node name="Sprite2D" type="Sprite2D" parent="Cubito"]
-position = Vector2(1438.59, 581)
+position = Vector2(-15.4081, -13.9998)
 scale = Vector2(0.157908, 0.166667)
 texture = ExtResource("1_wrrfe")
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
+[node name="BarHitbox" type="Area2D" parent="."]
+script = ExtResource("5_0fn81")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BarHitbox"]
+position = Vector2(1054, 1306)
+shape = SubResource("RectangleShape2D_pmwle")
+
+[node name="Bar" type="StaticBody2D" parent="."]
 position = Vector2(1738, 1267)
 physics_material_override = SubResource("PhysicsMaterial_scqqh")
 script = ExtResource("3_pgafb")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bar"]
 position = Vector2(-688.095, 49.5)
 scale = Vector2(41.2381, 19.6667)
 shape = SubResource("RectangleShape2D_r0rkc")
 
-[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
+[node name="Sprite2D" type="Sprite2D" parent="Bar"]
 position = Vector2(-687.5, 50.5)
 texture = ExtResource("5_3lfov")
 
@@ -63,6 +75,13 @@ position = Vector2(1732, 1070)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FinMapa"]
 position = Vector2(341.5, 387)
+shape = SubResource("RectangleShape2D_n7u0y")
+
+[node name="FinMapa2" type="Area2D" parent="."]
+position = Vector2(1732, 1070)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FinMapa2"]
+position = Vector2(-5077, 247)
 shape = SubResource("RectangleShape2D_n7u0y")
 
 [node name="timer" type="Label" parent="."]
@@ -130,3 +149,4 @@ vertical_alignment = 1
 justification_flags = 162
 
 [connection signal="body_entered" from="FinMapa" to="Cubito" method="_on_fin_mapa_body_entered"]
+[connection signal="body_entered" from="FinMapa2" to="Cubito" method="_on_fin_mapa_body_entered"]

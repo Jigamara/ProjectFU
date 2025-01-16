@@ -26,12 +26,12 @@ func rotate_down():
 		rotation_degrees = 90
 		position = Vector2(153, 1267)
 	else:
-		if rotation_degrees >= 38:
+		if rotation_degrees >= 42:
 			rotation_degrees -= 2
 			move_amount = Vector2(50, 0)
 			position += move_amount
 		else :
-			move_amount = Vector2(15, 0)
+			move_amount = Vector2(20, 0)
 			rotation_degrees -= 2
 			position += move_amount
 
@@ -42,11 +42,11 @@ func rotate_up():
 		rotation_degrees = 0
 		position = Vector2(1738, 1267)
 	else:
-		if rotation_degrees >= 38:
+		if rotation_degrees >= 42:
 			rotation_degrees += 2
 			move_amount = Vector2(-50, 0)
 			position += move_amount
 		else :
-			move_amount = Vector2(-15, 0)
+			move_amount = Vector2(-20, 0)
 			rotation_degrees += 2
 			position += move_amount

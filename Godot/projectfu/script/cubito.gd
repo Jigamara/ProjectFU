@@ -3,6 +3,7 @@ extends RigidBody2D
 var initial_position: Vector2
 var time_elapsed: float = 0.0
 var is_running: bool = false
+var cube_angle = self.rotation_degrees
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -12,7 +13,6 @@ func _ready() -> void:
 
 
 # Variables del algoritmo
-var aceleration: float = 0.0
 var gravity: float = 9.81
 var cube_mass = 1
 var weight = cube_mass * gravity
@@ -24,19 +24,32 @@ var weight = cube_mass * gravity
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if is_running: 
+		
+		cube_angle = self.rotation_degrees
+		
 		time_elapsed += delta
 		$"../timer".text = "Tiempo: " + "%.2f" % time_elapsed
 
 		# Variables del algortimo
-		var alpha = get_node("../StaticBody2D")
+		var alpha = get_node("../Bar")
 		alpha = alpha.angle
 		var sin_alpha = sin_degrees(alpha)
 		var co = 100
 		var _hip = co / sin_alpha
+		
+		var velocidadY = gravity * time_elapsed
+		var aceleration = (sin_alpha * weight) / cube_mass
+		var velocidadX =  aceleration*time_elapsed
+		
+		if cube_angle > 0 :
+			$"../VelocidadX".text = "Velocidad X: " + str("%.2f" % velocidadX)
+			$"../VelocidadY".text = "Velocidad Y: 0.0"
+		
+		if cube_angle <= 0:
+			$"../VelocidadY".text = "Velocidad Y: " + str("%.2f" % velocidadY)
+			$"../VelocidadX".text = "Velocidad X: 0.0"
 
-		$"../VelocidadY".text = "Velocidad Y: " + str("%.2f" % (gravity * time_elapsed))
-		$"../Aceleracion".text = "Aceleración: " + str("%.2f" % ((sin_alpha * weight) / cube_mass))
-		$"../VelocidadX".text = "Velocidad X: " + str("%.2f" % (aceleration*time_elapsed))
+		$"../Aceleracion".text = "Aceleración: " + str("%.2f" % aceleration)
 
 
 	if Input.is_action_just_pressed("start"): 
@@ -50,5 +63,4 @@ func sin_degrees(angle_degrees):
 
 
 func _on_fin_mapa_body_entered(_body: Node2D) -> void:
-	print("Cube salio")
 	is_running = false
