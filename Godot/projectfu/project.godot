@@ -19,6 +19,8 @@ config/icon="res://icon.svg"
 
 window/size/viewport_width=2268
 window/size/viewport_height=1473
+window/stretch/mode="viewport"
+window/stretch/aspect="ignore"
 
 [input]
 
